@@ -71,6 +71,30 @@
         </select>
       </div>
 
+      <div class="mb-3">
+        <span class="d-inline-block mr-4">Tags:</span>
+        @foreach ($tags as $tag)
+          <span class="d-inline-block mr-4">
+            <input 
+            @if (!$errors->any() && $post->tags->contains($tag->id))
+              checked
+            @elseif($errors->any() && in_array($tag->id, old('tags', [])))
+              checked
+            @endif
+            class="form-check-input" 
+            type="checkbox" 
+            value=" {{$tag->id}} " 
+            id="tag{{$loop->iteration}}"
+            name="tags[]">
+            <label 
+            class="form-check-label" 
+            for="tag{{$loop->iteration}}">
+              {{$tag->name}}
+            </label>
+          </span>
+        @endforeach
+      </div>
+
       <button type="submit" class="btn btn-primary">Submit</button>
       <button type="reset" class="btn btn-secondary">Reset</button>
     </form>

@@ -11,7 +11,7 @@
           <th scope="col">Title</th>
           <th scope="col">Content</th>
           <th scope="col">Categoria</th>
-          <th scope="col">Slug</th>
+          <th scope="col">Tags</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -28,7 +28,13 @@
               -
             @endif
           </td>
-          <td> {{$post->slug}} </td>
+          <td>
+            @forelse ($post->tags as $tag)
+              <span class="badge bg-primary"> {{$tag->name}} </span>
+            @empty
+              -
+            @endforelse
+          </td>
           <td><a class="btn-warning p-2 rounded d-flex align-items-center" href=" {{route('admin.posts.show', $post)}} ">Show</a> </td>
           <td>
             <form action=" {{route('admin.posts.destroy', $post)}} " method="POST" 

@@ -3,11 +3,22 @@
 @section('content')
 <div class="container">
     <h1> {{$post->title}} </h1>
-    <h4>
+    <div>
+        <h5 class="d-inline-block">Categoria:</h5>
         @if ($post->category)
             {{$post->category->name}}
         @endif
-    </h4>
+    </div>
+    
+    
+    <div>
+        <h5 class="d-inline-block">Tags:</h5>
+        @forelse ($post->tags as $tag)
+            <span class="badge bg-primary"> {{$tag->name}} </span>
+        @empty
+            -
+        @endforelse
+    </div>
 
 
     <p> {{$post->content}} </p>
